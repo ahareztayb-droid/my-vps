@@ -1,0 +1,23 @@
+name: FREE-VPS-TAYEB
+on: workflow_dispatch
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check Hardware Specs
+        run: |
+          echo "Checking CPU Model..."
+          lscpu | grep "Model name"
+          echo "Checking RAM Memory..."
+          free -h
+
+      - name: System Update
+        run: |
+          sudo apt update && sudo apt upgrade -y
+
+      - name: VPS Active Loop
+        run: |
+          echo "VPS is now ONLINE. Enjoy your free server!"
+          # This will keep the server running for 6 hours
+          sleep 21600
