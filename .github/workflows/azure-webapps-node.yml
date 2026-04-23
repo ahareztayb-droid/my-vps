@@ -1,23 +1,16 @@
-name: FREE-VPS-TAYEB
-on: workflow_dispatch
-
+name: VPS Online
+on:
+  workflow_dispatch:
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - name: Check Hardware Specs
+      - name: Connect Tailscale
+        uses: tailscale/github-action@v2
+        with:
+          authkey: ${{ secrets.TAILSCALE_AUTH_KEY }}
+          args: --advertise-exit-node
+      - name: Keep Alive
         run: |
-          echo "Checking CPU Model..."
-          lscpu | grep "Model name"
-          echo "Checking RAM Memory..."
-          free -h
-
-      - name: System Update
-        run: |
-          sudo apt update && sudo apt upgrade -y
-
-      - name: VPS Active Loop
-        run: |
-          echo "VPS is now ONLINE. Enjoy your free server!"
-          # This will keep the server running for 6 hours
-          sleep 21600
+          echo "VPS is running..."
+          sleep 6h
