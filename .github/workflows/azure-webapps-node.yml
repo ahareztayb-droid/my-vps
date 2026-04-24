@@ -1,16 +1,1 @@
-name: VPS Online
-on:
-  workflow_dispatch:
-jobs:
-  build:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Connect Tailscale
-        uses: tailscale/github-action@v2
-        with:
-          authkey: ${{ secrets.TAILSCALE_AUTH_KEY }}
-          args: --advertise-exit-node
-      - name: Keep Alive
-        run: |
-          echo "VPS is running..."
-          sleep 6h
+name: Kali-Cloud-Auto on: schedule: - cron: '0 */6 * * *' workflow_dispatch: jobs: build: runs-on: ubuntu-latest steps: - name: Install Tools run: | sudo apt update sudo apt install -y nmap sqlmap exploitdb openssh-server echo "runner:123" | sudo chpasswd sudo service ssh start - name: Tailscale uses: tailscale/github-action@v2 with: authkey: ${{ secrets.TAILSCALE_AUTH_KEY }} - name: Keep Alive run: sleep 6h
