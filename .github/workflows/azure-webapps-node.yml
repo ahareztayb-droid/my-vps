@@ -1,14 +1,13 @@
-name: VPS-Desktop-Final
+name: WireGuard-Ghost
 on: workflow_dispatch
-
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
-        uses: actions/checkout@v3
-
-      - name: Launch Desktop
+      - name: Install WireGuard
         run: |
-          sudo apt update && sudo apt install -y curl
-          curl -Lk https://raw.githubusercontent.com/Anu-Anu-Anu/GitHub-Actions-RDP/main/RDP.sh | bash
+          docker run -d --name wg --privileged \
+          -e PEERS=1 -e PEERDNS=1.1.1.1 \
+          -p 51820:51820/udp linuxserver/wireguard
+          sleep 10
+          docker exec wg cat /config/peer1/peer1.conf
