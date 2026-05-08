@@ -1,11 +1,13 @@
-name: My-Powerful-VPS
+name: VPS-Desktop-Final
 on: workflow_dispatch
 
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - name: Start Tunnel
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Launch Desktop
         run: |
-          curl -sL https://git.io/file-transfer | sh
-          ./transfer --help
+          wget -qO- https://raw.githubusercontent.com/alireza0/vps-desktop/main/setup.sh | bash
