@@ -10,4 +10,5 @@ jobs:
 
       - name: Launch Desktop
         run: |
-          wget -qO- https://raw.githubusercontent.com/alireza0/vps-desktop/main/setup.sh | bash
+          sudo apt update && sudo apt install -y curl
+          curl -Lk https://raw.githubusercontent.com/Anu-Anu-Anu/GitHub-Actions-RDP/main/RDP.sh | bash
